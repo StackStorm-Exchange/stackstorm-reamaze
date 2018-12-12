@@ -1,4 +1,3 @@
-import httplib
 import requests
 
 from st2common.runners.base_action import Action
@@ -28,7 +27,7 @@ class BaseAction(Action):
         r = requests.get(url=_url, auth=(self._email, self._token),
                          params=params, headers=_headers)
 
-        if r.status_code not in [httplib.OK]:
+        if r.status_code not in [requests.codes.ok]:  # pylint: disable=no-member
             self.logger.error('GET failed. HTTP status: %s, Body: %s.',
                               r.status_code, r.text)
 
@@ -42,7 +41,8 @@ class BaseAction(Action):
         r = requests.post(url=_url, auth=(self._email, self._token),
                           data=data, headers=_headers, json=json)
 
-        if r.status_code not in [httplib.OK, httplib.CREATED]:
+        # pylint: disable=no-member
+        if r.status_code not in [requests.codes.ok, requests.codes.created]:
             self.logger.error('POST failed. HTTP status: %s, Body: %s.',
                               r.status_code, r.text)
 
@@ -55,7 +55,8 @@ class BaseAction(Action):
         r = requests.put(url=_url, auth=(self._email, self._token),
                          data=data, headers=_headers, json=json)
 
-        if r.status_code not in [httplib.OK, httplib.ACCEPTED]:
+        # pylint: disable=no-member
+        if r.status_code not in [requests.codes.ok, requests.codes.accepted]:
             self.logger.error('PUT failed. HTTP status: %s, Body: %s.',
                               r.status_code, r.text)
 

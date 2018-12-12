@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.3.0
+
+- Bump allowed requests() version, remove httplib
+
 # 0.2.0
 
 - Rename `config.yaml` to `config.schema.yaml` and update to use schema.
