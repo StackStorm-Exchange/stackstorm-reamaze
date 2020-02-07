@@ -1,5 +1,9 @@
 # Change Log
 
+# 0.3.1
+
+- Add explicit support for Python 2 and 3
+
 # 0.3.0
 
 - Bump allowed requests() version, remove httplib
