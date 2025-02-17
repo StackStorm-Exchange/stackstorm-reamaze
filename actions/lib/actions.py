@@ -22,7 +22,7 @@ class BaseAction(Action):
 
     def _api_get(self, endpoint, headers={}, params=None):
         _url = self._api_root + endpoint
-        _headers = self._headers.update(headers)
+        _headers = {**self._headers, **headers}
 
         r = requests.get(url=_url, auth=(self._email, self._token),
                          params=params, headers=_headers)
@@ -36,7 +36,7 @@ class BaseAction(Action):
 
     def _api_post(self, endpoint, headers={}, data=None, json=None):
         _url = self._api_root + endpoint
-        _headers = self._headers.update(headers)
+        _headers = {**self._headers, **headers}
 
         r = requests.post(url=_url, auth=(self._email, self._token),
                           data=data, headers=_headers, json=json)
@@ -50,7 +50,7 @@ class BaseAction(Action):
 
     def _api_put(self, endpoint, headers={}, data=None, json=None):
         _url = self._api_root + endpoint
-        _headers = self._headers.update(headers)
+        _headers = {**self._headers, **headers}
 
         r = requests.put(url=_url, auth=(self._email, self._token),
                          data=data, headers=_headers, json=json)
@@ -68,3 +68,7 @@ class BaseAction(Action):
             return None
 
         return slug_name.lower().replace(' ', '-')
+
+    # Not used in actions but needed for testing
+    def run(self, **kwargs):
+        raise RuntimeError("run() not implemented")
